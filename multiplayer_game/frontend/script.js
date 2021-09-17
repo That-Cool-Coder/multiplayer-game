@@ -1,7 +1,8 @@
-const canvasSize = spnr.v(400, 250);
-const canvasSizer = new spnr.GameEngine.FixedARCanvasSizer(canvasSize, spnr.v(20, 20));
-const game = new Game();
-
+const canvasSize = spnr.v(800, 500);
 spnr.GameEngine.init(canvasSize, 1, 0x000000);
-//spnr.GameEngine.selectCanvasSizer(canvasSizer);
+
+const canvasSizer = new spnr.GameEngine.FixedARCanvasSizer(canvasSize, spnr.v(20, 20));
+spnr.GameEngine.selectCanvasSizer(canvasSizer);
+
+const game = new Game();
 spnr.GameEngine.selectScene(game);

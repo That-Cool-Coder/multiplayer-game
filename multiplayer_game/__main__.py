@@ -6,7 +6,7 @@ import eventlet
 
 from multiplayer_game import SVector, PlayerData
 
-PORT = 80
+PORT = 5784
 
 working_dir = os.path.dirname(os.path.abspath(__file__))
 sio = socketio.Server()
@@ -61,6 +61,10 @@ def update_player_data(sid: str, data: dict):
     player_data_list = [dataclasses.asdict(d) for d in player_data_list]
 
     sio.emit('set_player_datas', player_data_list)
+
+@sio.event
+def send_chat_message(sid: str, data: str):
+    sio.emit('new_chat_message', {'player_id' : sid_to_player_id[sid], 'content' : data})
 
 if __name__ == '__main__':
     eventlet.wsgi.server(eventlet.listen(('', PORT)), app, log_output=False)
